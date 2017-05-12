@@ -17,7 +17,7 @@ public class PlayerListener
         Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getInstance(), () -> {
             if(!e.getPlayer().isOnline()) return;
             PermissionUser user = PermissionsEx.getUser(e.getPlayer());
-            Main.getInstance().getTagManager().setTag(e.getPlayer(), Utils.getGroup(user), user.getPrefix().replace("&", "§"), user.getSuffix().replace("&", "§"));
+            Main.getInstance().getTagManager().setTag(e.getPlayer(), Utils.getTeamName(user), user.getPrefix().replace("&", "§"), user.getSuffix().replace("&", "§"));
             Main.getInstance().getTagManager().sendTags(e.getPlayer());
         }, 10L);
     }
