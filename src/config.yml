@@ -1,0 +1,12 @@
+DefaultGroup: default #дефолтная группа
+Positions: #позиции групп (по алфавиту)
+  owner: A
+  admin: B
+  moder: C
+  helper: D
+  builder: D
+  ultra: E
+  elite: F
+  premium: O
+  vip: J
+  default: Z
