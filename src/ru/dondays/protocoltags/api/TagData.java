@@ -18,6 +18,7 @@ public class TagData {
     private Set<Player> players = Sets.newHashSet();
 
     private TagPacket packet;
+    private boolean sended = false;
 
     protected TagData(final String name, final String prefix, final String suffix, final int goal) {
         this.name = name;
@@ -45,6 +46,7 @@ public class TagData {
 
     public void send(Player player) {
         this.packet.send(player);
+        if(!sended) sended = true;
     }
 
     public Set<Player> getPlayers() {
@@ -52,7 +54,12 @@ public class TagData {
     }
 
     public void setPlayers(final Set<Player> players) {
+        this.setPlayers(players, true);
+    }
+
+    public void setPlayers(final Set<Player> players, boolean update) {
         this.players = players;
+        if(update) this.packet.update();
     }
 
     public void addPlayer(Player player) {
@@ -75,5 +82,9 @@ public class TagData {
 
     public TagPacket getPacket() {
         return packet;
+    }
+
+    public boolean isSended() {
+        return sended;
     }
 }

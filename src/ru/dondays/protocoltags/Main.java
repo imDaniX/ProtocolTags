@@ -33,14 +33,12 @@ public class Main
             return false;
         }
         if(args.length == 0 || !args[0].equalsIgnoreCase("reload")) {
-            sender.sendMessage("§cИспользуйте §c/protocoltags reload");
+            sender.sendMessage("§eИспользуйте §c/protocoltags reload");
             return false;
         }
         Utils.load();
-        this.getServer().getOnlinePlayers().forEach(player -> {
-            //this.tagManager.checkTag(player);
-            TagHandler.joinTag(player);
-        });
+        //this.tagManager.checkTag(player);
+        this.getServer().getOnlinePlayers().forEach(TagHandler::joinTag);
         sender.sendMessage("§aКонфигурация успешно перезагружена!");
         return true;
     }

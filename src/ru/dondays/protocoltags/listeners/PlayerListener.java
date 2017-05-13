@@ -16,11 +16,14 @@ public class PlayerListener
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        Main.getInstance().getTagManager().clearTags(e.getPlayer());
+        Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getInstance(), () -> {
+            if(!e.getPlayer().isOnline()) return;
+            Main.getInstance().getTagManager().clearTags(e.getPlayer());
+        }, 10L);
         Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getInstance(), () -> {
             if(!e.getPlayer().isOnline()) return;
             TagHandler.joinTag(e.getPlayer());
-        }, 10L);
+        }, 12L);
     }
 
     @EventHandler

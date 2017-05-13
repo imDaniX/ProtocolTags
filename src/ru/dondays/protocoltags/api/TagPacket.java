@@ -22,6 +22,9 @@ public class TagPacket {
 
     public void update() {
         this.packet.setPlayers(data.getPlayerNames());
+        final TagData a = new TagData(data.getName(), data.getPrefix(), data.getSuffix(), 3);
+        a.setPlayers(this.data.getPlayers(), false);
+        a.send();
     }
 
     public void playerRemoved(final Player player) {

@@ -11,7 +11,7 @@ public class TagHandler {
     public static void joinTag(final Player player) {
         final PermissionUser user = PermissionsEx.getUser(player);
         if(!Utils.getPermissionGroup(user).getPrefix().equals(user.getPrefix()) || !Utils.getPermissionGroup(user).getSuffix().equals(user.getSuffix())) {
-            setTag(player, player.getName(), user.getPrefix().replace("&", "§"), user.getSuffix().replace("&", "§"));
+            setTag(player, user.getPrefix().replace("&", "§"), user.getSuffix().replace("&", "§"));
         } else {
             setTag(player, Utils.getTeamName(user), user.getPrefix().replace("&", "§"), user.getSuffix().replace("&", "§"));
         }

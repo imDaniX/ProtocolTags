@@ -32,37 +32,16 @@ public class TagManager {
         data.send();
     }
 
-    public void setOwnTag(final Player player, final String prefix, final String suffix) {
-        this.setOwnTag(player, prefix, suffix);
-    }
-
-    public void setOwnTag(final Player player, final String team, final String prefix, final String suffix) {
-        this.setTag(player, team, prefix, suffix, false);
-    }
-
-    public void setTag(final Player player, final String prefix, final String suffix) {
-        this.setTag(player, player.getName(), prefix, suffix);
-    }
-
-    public void setTag(final Player player, final String team, final String prefix, final String suffix) {
-        this.setTag(player, team, prefix, suffix, true);
-    }
-
-    private void setTag(final Player player, final String team, final String prefix, final String suffix, final boolean send) {
-        if(this.datas.containsKey(team.toLowerCase())) {
-            final TagData data = this.datas.get(team.toLowerCase());
-            if(!data.getPlayers().contains(player)) data.addPlayer(player);
-            data.send();
-            return;
+    public void setTag(final Player player, final String name, final String prefix, final String suffix) {
+        TagData td = this.datas.get(name);
+        if(td == null) {
+            td = new TagData(name, prefix, suffix);
+            this.datas.put(td.getName(), td);
+            td.send();
         }
-        final TagData data = new TagData(team, prefix, suffix);
-        this.datas.put(team.toLowerCase(), data);
-        data.addPlayer(player);
-        if(send) {
-            data.send();
-        } else {
-            data.send(player);
-        }
+        if(!td.isSended()) td.send();
+        td.addPlayer(player);
+        System.out.println("chelnkin dondays");
     }
 
     private TagData getTagDataToReset(final Player player) {
