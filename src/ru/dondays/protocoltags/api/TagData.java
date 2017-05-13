@@ -51,6 +51,10 @@ public class TagData {
         return this.players;
     }
 
+    public void setPlayers(final Set<Player> players) {
+        this.players = players;
+    }
+
     public void addPlayer(Player player) {
         this.players.add(player);
         this.packet.update();

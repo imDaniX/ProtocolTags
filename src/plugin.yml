@@ -3,3 +3,5 @@ main: ru.dondays.protocoltags.Main
 version: 1.0
 author: DonDays
 depend: [ProtocolLib, PermissionsEx]
+commands:
+  protocoltags:

@@ -24,12 +24,19 @@ public class TagPacket {
         this.packet.setPlayers(data.getPlayerNames());
     }
 
+    public void playerRemoved(final Player player) {
+        final TagData r = new TagData(data.getName(), data.getPrefix(), data.getSuffix(), 4);
+        r.addPlayer(player);
+        r.send();
+    }
+
     public void send(final Player player) {
         this.packet.sendPacket(player);
     }
 
-    public void destroy() {
+    public void destroy(final Player player) {
         this.packet.setMode(1);
-        this.data.send();
+        this.data.send(player);
+        this.packet.setMode(0);
     }
 }

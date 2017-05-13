@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import org.bukkit.entity.Player;
 import ru.tehkode.permissions.PermissionGroup;
 import ru.tehkode.permissions.PermissionUser;
+import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -13,7 +14,7 @@ import java.util.Set;
 
 public class Utils {
 
-    private static Map<String, String> positions = Maps.newHashMap();
+    private static Map<String, String> positions;
 
     public static String getTeamName(final PermissionUser user) {
         String s = positions.get(getGroup(user));
@@ -25,6 +26,12 @@ public class Utils {
         PermissionGroup[] groups = user.getGroups();
         if(groups.length <= 0) return Main.getInstance().getConfig().getString("DefaultGroup");
         return groups[0].getName();
+    }
+
+    public static PermissionGroup getPermissionGroup(final PermissionUser user) {
+        PermissionGroup[] groups = user.getGroups();
+        if(groups.length <= 0) return PermissionsEx.getPermissionManager().getGroup(Main.getInstance().getConfig().getString("DefaultGroup"));
+        return groups[0];
     }
 
     public static Set<String> getNames(final Collection<Player> players) {
@@ -44,7 +51,12 @@ public class Utils {
         }
     }
 
-    static {
+    static void load() {
+        if(positions != null) {
+            positions.clear();
+        } else {
+            positions = Maps.newHashMap();
+        }
         Main.getInstance().getConfig().getConfigurationSection("Positions").getKeys(false).forEach(position ->
             positions.put(position, Main.getInstance().getConfig().getString("Positions." + position))
         );

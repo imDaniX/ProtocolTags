@@ -9,6 +9,19 @@ public class TagManager {
 
     private final Map<String, TagData> datas = Maps.newHashMap();
 
+    public void checkTag(final Player player) {
+        datas.values().forEach(data -> {
+            if(data.getPlayers().remove(player)) {
+                data.removePlayer(player);
+                data.getPacket().playerRemoved(player);
+            }
+        });
+    }
+
+    public void clearTags(final Player player) {
+        datas.values().forEach(data -> data.getPacket().destroy(player));
+    }
+
     public void sendTags(final Player player) {
         this.datas.values().forEach(data -> data.send(player));
     }

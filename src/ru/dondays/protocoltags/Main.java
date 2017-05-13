@@ -1,6 +1,9 @@
 package ru.dondays.protocoltags;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
+import ru.dondays.protocoltags.api.TagHandler;
 import ru.dondays.protocoltags.api.TagManager;
 import ru.dondays.protocoltags.listeners.PlayerListener;
 
@@ -14,12 +17,32 @@ public class Main
     public void onEnable() {
         instance = this;
         this.saveDefaultConfig();
+        Utils.load();
         this.tagManager = new TagManager();
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
     }
 
     public TagManager getTagManager() {
         return this.tagManager;
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if(!sender.hasPermission("protocoltags.reload")) {
+            sender.sendMessage("§cУ вас нет прав");
+            return false;
+        }
+        if(args.length == 0 || !args[0].equalsIgnoreCase("reload")) {
+            sender.sendMessage("§cИспользуйте §c/protocoltags reload");
+            return false;
+        }
+        Utils.load();
+        this.getServer().getOnlinePlayers().forEach(player -> {
+            this.tagManager.checkTag(player);
+            TagHandler.joinTag(player);
+        });
+        sender.sendMessage("§aКонфигурация успешно перезагружена!");
+        return true;
     }
 
     public static Main getInstance() {
