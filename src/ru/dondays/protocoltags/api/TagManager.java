@@ -41,7 +41,6 @@ public class TagManager {
         }
         if(!td.isSended()) td.send();
         td.addPlayer(player);
-        System.out.println("chelnkin dondays");
     }
 
     private TagData getTagDataToReset(final Player player) {
