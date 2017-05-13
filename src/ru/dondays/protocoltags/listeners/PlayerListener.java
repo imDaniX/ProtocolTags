@@ -25,6 +25,6 @@ public class PlayerListener
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
-        Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getInstance(), () -> Main.getInstance().getTagManager().checkTag(e.getPlayer()), 10L);
+        //Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getInstance(), () -> Main.getInstance().getTagManager().checkTag(e.getPlayer()), 10L);
     }
 }

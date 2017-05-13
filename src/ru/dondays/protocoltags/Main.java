@@ -38,7 +38,7 @@ public class Main
         }
         Utils.load();
         this.getServer().getOnlinePlayers().forEach(player -> {
-            this.tagManager.checkTag(player);
+            //this.tagManager.checkTag(player);
             TagHandler.joinTag(player);
         });
         sender.sendMessage("§aКонфигурация успешно перезагружена!");
