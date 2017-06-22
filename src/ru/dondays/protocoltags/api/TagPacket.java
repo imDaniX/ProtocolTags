@@ -1,45 +1,114 @@
 package ru.dondays.protocoltags.api;
 
-import com.comphenix.packetwrapper.WrapperPlayServerScoreboardTeam;
+import ru.dondays.protocoltags.packetwrapper.WrapperPlayServerScoreboardTeam;
+import com.google.common.collect.Sets;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class TagPacket {
 
-    private TagData data;
     private WrapperPlayServerScoreboardTeam packet;
 
-    public TagPacket(final TagData data, final int mode) {
-        this.data = data;
+    /* ------------------------------------------------- */
+    private String name;
+    private int mode;
+    private Collection<Player> players = Sets.newHashSet();
+    /* ------------------------------------------------- */
+
+    public TagPacket(String name, int mode) {
+        this.name = name;
+        this.mode = mode;
+
         this.packet = new WrapperPlayServerScoreboardTeam();
 
-        this.packet.setName(data.getName());
-        this.packet.setDisplayName(data.getName());
-        this.packet.setPrefix(data.getPrefix());
-        this.packet.setSuffix(data.getSuffix());
+        this.packet.setName(name);
+        this.packet.setDisplayName(name);
         this.packet.setMode(mode);
         this.packet.setNameTagVisibility("true");
     }
 
-    public void update() {
-        this.packet.setPlayers(data.getPlayerNames());
-        final TagData a = new TagData(data.getName(), data.getPrefix(), data.getSuffix(), 3);
-        a.setPlayers(this.data.getPlayers(), false);
-        a.send();
+    public TagPacket(String name, int mode, Player player) {
+        this(name, mode);
+        players.add(player);
+        packet.getPlayers().add(player.getName());
     }
 
-    public void playerRemoved(final Player player) {
-        final TagData r = new TagData(data.getName(), data.getPrefix(), data.getSuffix(), 4);
-        r.addPlayer(player);
-        r.send();
+    public TagPacket(String name, int mode, Collection<Player> players) {
+        this(name, mode);
+        this.players.addAll(players);
+        packet.getPlayers().addAll(players.stream().map(HumanEntity::getName).collect(Collectors.toList()));
     }
 
-    public void send(final Player player) {
-        this.packet.sendPacket(player);
+    public void insertData(TagData data) {
+        this.packet.setPrefix(data.getPrefix());
+        this.packet.setSuffix(data.getSuffix());
     }
 
-    public void destroy(final Player player) {
-        this.packet.setMode(1);
-        this.data.send(player);
-        this.packet.setMode(0);
+    public boolean hasPlayer(Player player) {
+        return players.contains(player);
+    }
+
+    @Deprecated
+    public void addPlayer(Player player) {
+        addPlayer(player, null);
+    }
+
+    public void addPlayer(Player player, TagData data) {
+        players.add(player);
+        packet.getPlayers().add(player.getName());
+
+        TagPacket packet = new TagPacket(getName(), WrapperPlayServerScoreboardTeam.Mode.PLAYERS_ADDED, player);
+        if(data != null) packet.insertData(data);
+        packet.send();
+    }
+
+    @Deprecated
+    public void removePlayer(Player player) {
+        removePlayer(player, null);
+    }
+
+    public void removePlayer(Player player, TagData data) {
+        players.add(player);
+        packet.getPlayers().remove(player.getName());
+
+        TagPacket packet = new TagPacket(getName(), WrapperPlayServerScoreboardTeam.Mode.PLAYERS_REMOVED, player);
+        if(data != null) packet.insertData(data);
+        packet.send();
+    }
+
+    public Collection<Player> getPlayers() {
+        return players;
+    }
+
+    public Collection<String> getPacketMembers() {
+        return unsafe().getPlayers();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void send(Player player) {
+        packet.sendPacket(player);
+    }
+
+    public void sendToTeamMembers() {
+        players.forEach(this::send);
+    }
+
+    public void send() {
+        Bukkit.getOnlinePlayers().forEach(this::send);
+    }
+
+    public WrapperPlayServerScoreboardTeam unsafe() {
+        return packet;
+    }
+
+    public int getMode() {
+        return mode;
     }
 }
