@@ -28,7 +28,7 @@ public class TagPacket {
         this.packet.setName(name);
         this.packet.setDisplayName(name);
         this.packet.setMode(mode);
-        this.packet.setNameTagVisibility("true");
+        this.packet.setNameTagVisibility("ALWAYS");
     }
 
     public TagPacket(String name, int mode, Player player) {
