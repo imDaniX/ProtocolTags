@@ -1,14 +1,15 @@
 package ru.dondays.protocoltags.api;
 
-import com.google.common.collect.Maps;
 import org.bukkit.entity.Player;
+import ru.dondays.protocoltags.utils.TagDataMap;
+import ru.dondays.protocoltags.utils.Utils;
 
 import java.util.Collection;
 import java.util.Map;
 
 public class TagManager {
 
-    private Map<String, TagData> datas = Maps.newConcurrentMap();
+    private TagDataMap datas = new TagDataMap();
 
     public TagManager() {
         TagHandler.init(this);
@@ -24,6 +25,7 @@ public class TagManager {
 
     public void setTag(Player player, String team, String prefix, String suffix) {
         team = team.toLowerCase();
+        team = Utils.fixName(team);
 
         synchronized(this) {
             if(hasTag(player)) getTagData(player).destroy(player);
@@ -38,6 +40,10 @@ public class TagManager {
             data = new TagData(team, prefix, suffix);
             datas.put(team, data);
             data.getPacket().send();
+            if(data.getName().contains(player.getName())) {
+                data.destroy();
+                data.getPacket().send();
+            }
         }
         synchronized(this) {
             data.addPlayer(player);
@@ -57,7 +63,7 @@ public class TagManager {
     }
 
     public void removeTeam(String team) {
-        team = team.toLowerCase();
+        team = Utils.fixName(team.toLowerCase());
 
         if(datas.get(team) == null) return;
         TagData data = datas.get(team);
@@ -66,10 +72,10 @@ public class TagManager {
     }
 
     public void clearTag(Player player) {
-        for(TagData data: datas.values()) {
-            if(!data.hasPlayer(player)) continue;
-            data.removePlayer(player);
-        }
+        datas.values()
+                .stream()
+                .filter(data -> data.hasPlayer(player))
+                .forEach(data -> data.removePlayer(player));
     }
 
     public boolean hasTag(Player player) {
@@ -82,6 +88,10 @@ public class TagManager {
             return data;
         }
         return null;
+    }
+
+    public Map<String, TagData> getDatasMap() {
+        return datas;
     }
 
     public Collection<TagData> getDatas() {

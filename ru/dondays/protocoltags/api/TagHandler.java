@@ -3,6 +3,7 @@ package ru.dondays.protocoltags.api;
 import org.bukkit.entity.Player;
 
 import java.util.Collection;
+import java.util.Map;
 
 public class TagHandler {
 
@@ -42,5 +43,13 @@ public class TagHandler {
 
     public static Collection<TagData> getDatas() {
         return manager.getDatas();
+    }
+
+    public static Map<String, TagData> getDatasMap() {
+        return manager.getDatasMap();
+    }
+
+    public static TagManager getTagManager() {
+        return manager;
     }
 }

@@ -3,7 +3,7 @@ package ru.dondays.protocoltags.api;
 import ru.dondays.protocoltags.packetwrapper.WrapperPlayServerScoreboardTeam;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import ru.dondays.protocoltags.Utils;
+import ru.dondays.protocoltags.utils.Utils;
 
 import java.util.Collection;
 

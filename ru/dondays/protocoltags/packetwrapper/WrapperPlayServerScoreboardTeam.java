@@ -91,8 +91,8 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
         handle.getStrings().write(5, value);
     }
 
-    public List<String> getPlayers() {
-        return (List<String>) handle.getSpecificModifier(Collection.class)
+    public Collection<String> getPlayers() {
+        return (Collection<String>) handle.getSpecificModifier(Collection.class)
                 .read(0);
     }
 

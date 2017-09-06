@@ -1,5 +1,6 @@
 package ru.dondays.protocoltags.api;
 
+import ru.dondays.protocoltags.utils.Utils;
 import ru.dondays.protocoltags.packetwrapper.WrapperPlayServerScoreboardTeam;
 import com.google.common.collect.Sets;
 import org.bukkit.Bukkit;
@@ -20,7 +21,7 @@ public class TagPacket {
     /* ------------------------------------------------- */
 
     public TagPacket(String name, int mode) {
-        this.name = name;
+        this.name = Utils.fixName(name);
         this.mode = mode;
 
         this.packet = new WrapperPlayServerScoreboardTeam();
@@ -28,7 +29,7 @@ public class TagPacket {
         this.packet.setName(name);
         this.packet.setDisplayName(name);
         this.packet.setMode(mode);
-        this.packet.setNameTagVisibility("true");
+        this.packet.setNameTagVisibility("ALWAYS");
     }
 
     public TagPacket(String name, int mode, Player player) {

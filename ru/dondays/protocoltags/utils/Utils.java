@@ -1,6 +1,7 @@
-package ru.dondays.protocoltags;
+package ru.dondays.protocoltags.utils;
 
 import com.google.common.collect.Maps;
+import ru.dondays.protocoltags.ProtocolTags;
 import ru.tehkode.permissions.PermissionGroup;
 import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
@@ -12,8 +13,13 @@ public class Utils {
 
     private static Map<String, String> positions;
 
+    public static String fixName(String input) {
+        if(input.length() > 15) return input.substring(0, 15);
+        return input;
+    }
+
     public static String fix(String input) {
-        if(input.length() > 14) return input.substring(0, 14);
+        if(input.length() > 16) return input.substring(0, 16);
         return input;
     }
 
@@ -46,7 +52,7 @@ public class Utils {
         }
     }
 
-    static void load() {
+    public static void load() {
         if(positions != null) {
             positions.clear();
         } else {
