@@ -13,7 +13,7 @@ public class TagData {
     private TagPacket packet;
 
     public TagData(String name, String prefix, String suffix) {
-        packet = new TagPacket(name, WrapperPlayServerScoreboardTeam.Mode.TEAM_CREATED);
+        packet = new TagPacket(Utils.parseName(name), WrapperPlayServerScoreboardTeam.Mode.TEAM_CREATED);
 
         this.packet.unsafe().setPrefix(Utils.parse(prefix));
         this.packet.unsafe().setSuffix(Utils.parse(suffix));

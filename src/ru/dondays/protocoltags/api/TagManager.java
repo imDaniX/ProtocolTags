@@ -2,7 +2,6 @@ package ru.dondays.protocoltags.api;
 
 import org.bukkit.entity.Player;
 import ru.dondays.protocoltags.utils.TagDataMap;
-import ru.dondays.protocoltags.utils.Utils;
 
 import java.util.Collection;
 import java.util.Map;
@@ -25,17 +24,12 @@ public class TagManager {
 
     public void setTag(Player player, String team, String prefix, String suffix) {
         team = team.toLowerCase();
-        team = Utils.parseName(team);
 
         synchronized(this) {
             if(hasTag(player)) clearTag(player);
         }
 
-        TagData data = null;
-        for(TagData td: datas.values()) {
-            if(!td.getName().equals(team)) continue;
-            data = td;
-        }
+        TagData data = datas.get(team);
         if(data == null) {
             data = new TagData(team, prefix, suffix);
             datas.put(team, data);
@@ -63,8 +57,6 @@ public class TagManager {
     }
 
     public void removeTeam(String team) {
-        team = Utils.parseName(team.toLowerCase());
-
         if(datas.get(team) == null) return;
         TagData data = datas.get(team);
         data.destroy();

@@ -47,7 +47,7 @@ public class ProtocolTags
         } else {
             configManager.getGroup(group.getName()).apply(player);
         }
-        
+
         if(configManager.isDisplayNamesRewrite()) {
             player.setDisplayName((configManager.isCustomTagsEnabled() ? Utils.colorize(user.getPrefix()) :
                 Utils.colorize(group.getPrefix())) + player.getDisplayName());
