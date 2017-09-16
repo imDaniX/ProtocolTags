@@ -35,12 +35,13 @@ public class ConfigurationManager {
                     new Group(defaultGroup, "&7", "", "Z"));
         }
 
+        if(retagTask != null) {
+            retagTask.cancel();
+            retagTask = null;
+        }
         if(main.getConfig().getBoolean("Retag.enabled")) {
-            if(retagTask != null) retagTask.cancel();
             long interval = main.getConfig().getInt("Retag.interval")*20L;
             retagTask = Bukkit.getScheduler().runTaskTimerAsynchronously(main, () -> main.setTags(), interval, interval);
-        } else {
-            if(retagTask != null) retagTask.cancel();
         }
     }
 
