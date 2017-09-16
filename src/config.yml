@@ -1,0 +1,19 @@
+RewriteDisplayNames: true #перезаписывать DisplayName игроков
+EnableCustomTags: true #при true игрокам с измененными префиксами/суффиксами будет ставиться тег исходя из них
+Retag: #автообновление тегов игроков
+  enabled: true
+  interval: 60 #в секундах
+DefaultGroup: default #дефолтная группа
+Groups: #позиции групп
+  admin:
+    prefix: '&c[Admin] ' #префиксы/суффиксы можно не заполнять, если они не указаны плагин возьмет их из PermissionsEx
+    suffix: ''
+    priority: 1
+  moder:
+    priority: 2 #таким образом, можно указать лишь только префикс/суффикс/все вместе
+  premium:
+    prefix: '&6[Premium] '
+    priority: 2
+  default:
+    suffix: ''
+    priority: 3

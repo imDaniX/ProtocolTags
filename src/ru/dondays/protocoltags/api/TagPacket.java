@@ -1,11 +1,11 @@
 package ru.dondays.protocoltags.api;
 
-import ru.dondays.protocoltags.utils.Utils;
-import ru.dondays.protocoltags.packetwrapper.WrapperPlayServerScoreboardTeam;
 import com.google.common.collect.Sets;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+import ru.dondays.protocoltags.packetwrapper.WrapperPlayServerScoreboardTeam;
+import ru.dondays.protocoltags.utils.Utils;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -21,7 +21,7 @@ public class TagPacket {
     /* ------------------------------------------------- */
 
     public TagPacket(String name, int mode) {
-        this.name = Utils.fixName(name);
+        this.name = Utils.parseName(name);
         this.mode = mode;
 
         this.packet = new WrapperPlayServerScoreboardTeam();

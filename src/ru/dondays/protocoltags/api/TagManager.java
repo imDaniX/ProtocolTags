@@ -12,7 +12,7 @@ public class TagManager {
     private TagDataMap datas = new TagDataMap();
 
     public TagManager() {
-        TagHandler.init(this);
+        TagAppiler.init(this);
     }
 
     public void setTag(Player player, String prefix) {
@@ -25,10 +25,10 @@ public class TagManager {
 
     public void setTag(Player player, String team, String prefix, String suffix) {
         team = team.toLowerCase();
-        team = Utils.fixName(team);
+        team = Utils.parseName(team);
 
         synchronized(this) {
-            if(hasTag(player)) getTagData(player).destroy(player);
+            if(hasTag(player)) clearTag(player);
         }
 
         TagData data = null;
@@ -63,7 +63,7 @@ public class TagManager {
     }
 
     public void removeTeam(String team) {
-        team = Utils.fixName(team.toLowerCase());
+        team = Utils.parseName(team.toLowerCase());
 
         if(datas.get(team) == null) return;
         TagData data = datas.get(team);

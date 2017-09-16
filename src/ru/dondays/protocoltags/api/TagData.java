@@ -1,8 +1,9 @@
 package ru.dondays.protocoltags.api;
 
-import ru.dondays.protocoltags.packetwrapper.WrapperPlayServerScoreboardTeam;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import ru.dondays.protocoltags.ProtocolTags;
+import ru.dondays.protocoltags.packetwrapper.WrapperPlayServerScoreboardTeam;
 import ru.dondays.protocoltags.utils.Utils;
 
 import java.util.Collection;
@@ -11,16 +12,11 @@ public class TagData {
 
     private TagPacket packet;
 
-    /* ---------------- */
-    private String prefix;
-    private String suffix;
-    /* ---------------- */
-
     public TagData(String name, String prefix, String suffix) {
         packet = new TagPacket(name, WrapperPlayServerScoreboardTeam.Mode.TEAM_CREATED);
 
-        this.prefix = Utils.fix(prefix);
-        this.suffix = Utils.fix(suffix);
+        this.packet.unsafe().setPrefix(Utils.parse(prefix));
+        this.packet.unsafe().setSuffix(Utils.parse(suffix));
 
         packet.insertData(this);
     }
@@ -43,6 +39,10 @@ public class TagData {
 
     public void removePlayer(Player player) {
         getPacket().removePlayer(player, this);
+
+        if(getPlayers().size() == 0) {
+            ProtocolTags.getInstance().getTagManager().removeTeam(this);
+        }
     }
 
     public Collection<Player> getPlayers() {
@@ -50,11 +50,11 @@ public class TagData {
     }
 
     public String getPrefix() {
-        return prefix;
+        return packet.unsafe().getPrefix();
     }
 
     public String getSuffix() {
-        return suffix;
+        return packet.unsafe().getSuffix();
     }
 
     public void destroy() {

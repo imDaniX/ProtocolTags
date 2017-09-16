@@ -1,11 +1,11 @@
 package ru.dondays.protocoltags.packetwrapper;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.reflect.IntEnum;
+
+import java.util.Collection;
+import java.util.List;
 
 public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 

@@ -5,23 +5,23 @@ import org.bukkit.entity.Player;
 import java.util.Collection;
 import java.util.Map;
 
-public class TagHandler {
+public class TagAppiler {
 
     private static TagManager manager;
 
     static void init(TagManager manager) {
-        TagHandler.manager = manager;
+        TagAppiler.manager = manager;
     }
 
-    public static void setTag(Player player, String prefix) {
-        setTag(player, prefix);
+    public static void applyTag(Player player, String prefix) {
+        applyTag(player, prefix);
     }
 
-    public static void setTag(Player player, String prefix, String suffix) {
-        setTag(player, player.getName(), prefix, suffix);
+    public static void applyTag(Player player, String prefix, String suffix) {
+        applyTag(player, player.getName(), prefix, suffix);
     }
 
-    public static void setTag(Player player, String team, String prefix, String suffix) {
+    public static void applyTag(Player player, String team, String prefix, String suffix) {
         manager.setTag(player, team, prefix, suffix);
     }
 
