@@ -1,8 +1,8 @@
 name: ProtocolTags
 main: ru.dondays.protocoltags.ProtocolTags
-version: 1.2a
+version: 1.2b
 author: DonDays
-description: Universal, simple tag manager implementing useful API
+description: Simple plugin for edit players tab and head tags  containing useful API
 depend: [PermissionsEx, ProtocolLib]
 commands:
   protocoltags:

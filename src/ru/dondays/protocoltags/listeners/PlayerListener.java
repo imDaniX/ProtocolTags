@@ -19,7 +19,7 @@ public class PlayerListener
         Bukkit.getScheduler().runTaskLaterAsynchronously(ProtocolTags.getInstance(), () -> {
             if(!e.getPlayer().isOnline()) return;
             ProtocolTags.getInstance().setTags(e.getPlayer());
-        }, 18L);
+        }, 12L);
     }
 
     @EventHandler
