@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitTask;
 import ru.dondays.protocoltags.ProtocolTags;
+import ru.dondays.protocoltags.TagSetup;
 import ru.dondays.protocoltags.groups.Group;
 
 import java.util.Map;
@@ -41,7 +42,7 @@ public class ConfigurationManager {
         }
         if(main.getConfig().getBoolean("Retag.enabled")) {
             long interval = main.getConfig().getInt("Retag.interval")*20L;
-            retagTask = Bukkit.getScheduler().runTaskTimerAsynchronously(main, () -> main.setTags(), interval, interval);
+            retagTask = Bukkit.getScheduler().runTaskTimerAsynchronously(main, TagSetup::setTags, interval, interval);
         }
     }
 
