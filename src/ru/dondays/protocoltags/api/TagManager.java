@@ -10,10 +10,6 @@ public class TagManager {
 
     private TagDataMap datas = new TagDataMap();
 
-    public TagManager() {
-        TagAppiler.init(this);
-    }
-
     public void setTag(Player player, String prefix) {
         setTag(player, prefix, "");
     }

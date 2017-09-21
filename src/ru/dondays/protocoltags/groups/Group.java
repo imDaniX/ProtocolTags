@@ -2,7 +2,7 @@ package ru.dondays.protocoltags.groups;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import ru.dondays.protocoltags.api.TagAppiler;
+import ru.dondays.protocoltags.api.TagApplier;
 import ru.dondays.protocoltags.bridge.VaultBridge;
 import ru.dondays.protocoltags.utils.Utils;
 
@@ -48,6 +48,6 @@ public class Group {
     }
 
     public void apply(Player player) {
-        TagAppiler.applyTag(player, Utils.parseName(priority + name), prefix, suffix);
+        TagApplier.applyTag(player, Utils.parseName(priority + name), prefix, suffix);
     }
 }
