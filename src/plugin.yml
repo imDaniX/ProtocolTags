@@ -2,7 +2,7 @@ name: ProtocolTags
 main: ru.dondays.protocoltags.ProtocolTags
 version: 1.2b
 author: DonDays
-description: Simple plugin for edit players tab and head tags  containing useful API
-depend: [PermissionsEx, ProtocolLib]
+description: Simple plugin for edit players tab and head tags containing useful API
+depend: [ProtocolLib, Vault]
 commands:
   protocoltags:

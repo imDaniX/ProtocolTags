@@ -2,9 +2,8 @@ package ru.dondays.protocoltags.groups;
 
 import org.bukkit.entity.Player;
 import ru.dondays.protocoltags.api.TagAppiler;
+import ru.dondays.protocoltags.bridge.VaultBridge;
 import ru.dondays.protocoltags.utils.Utils;
-import ru.tehkode.permissions.PermissionGroup;
-import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class Group {
 
@@ -14,24 +13,19 @@ public class Group {
     private String priority;
 
     public Group(String name, String prefix, String suffix, int priority) {
-        this(name, prefix, suffix, priority > 26 || priority == 1 ? "A" : String.valueOf((char)('A'+priority)));
+        this(name, prefix, suffix, priority > 26 || priority == 1 ? "A": String.valueOf((char)('A' + priority)));
     }
 
     public Group(String name, String prefix, String suffix, String priority) {
         this.name = name;
         this.priority = priority;
 
-        if(prefix == null || suffix == null) {
-            PermissionGroup group = PermissionsEx.getPermissionManager().getGroup(name);
-            String groupPrefix = "";
-            String groupSuffix = "";
-            if(group != null) {
-                groupPrefix = group.getPrefix();
-                groupSuffix = group.getSuffix();
-            }
-            if(prefix == null) prefix = groupPrefix;
-            if(suffix == null) suffix = groupSuffix;
-        }
+        String groupPrefix = VaultBridge.getChat().getGroupPrefix((String)null, name) == null ? "":
+                VaultBridge.getChat().getGroupPrefix((String)null, name);
+        String groupSuffix = VaultBridge.getChat().getGroupSuffix((String)null, name) == null ? "":
+                VaultBridge.getChat().getGroupSuffix((String)null, name);
+        if(prefix == null || prefix.isEmpty()) prefix = groupPrefix;
+        if(suffix == null || suffix.isEmpty()) suffix = groupSuffix;
         this.prefix = Utils.colorize(prefix);
         this.suffix = Utils.colorize(suffix);
     }

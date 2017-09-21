@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import ru.dondays.protocoltags.ProtocolTags;
+import ru.dondays.protocoltags.TagSetup;
 
 public class PlayerListener
     implements Listener {
@@ -18,7 +19,7 @@ public class PlayerListener
         }, 10L);
         Bukkit.getScheduler().runTaskLaterAsynchronously(ProtocolTags.getInstance(), () -> {
             if(!e.getPlayer().isOnline()) return;
-            ProtocolTags.getInstance().setTags(e.getPlayer());
+            TagSetup.setTags(e.getPlayer());
         }, 12L);
     }
 
