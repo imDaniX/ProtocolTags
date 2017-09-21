@@ -15,8 +15,8 @@ public class TagSetup {
     public static void setTags(Player player) {
         String group = VaultBridge.getPermission().getPrimaryGroup(player).toLowerCase();
 
-        String groupPrefix = VaultBridge.getChat().getGroupPrefix((String)null, group);
-        String groupSuffix = VaultBridge.getChat().getGroupSuffix((String)null, group);
+        String groupPrefix = VaultBridge.getChat().getGroupPrefix(player.getWorld(), group);
+        String groupSuffix = VaultBridge.getChat().getGroupSuffix(player.getWorld(), group);
         String playerPrefix = VaultBridge.getChat().getPlayerPrefix(player);
         String playerSuffix = VaultBridge.getChat().getPlayerSuffix(player);
 

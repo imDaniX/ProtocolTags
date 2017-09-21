@@ -1,5 +1,6 @@
 package ru.dondays.protocoltags.groups;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import ru.dondays.protocoltags.api.TagAppiler;
 import ru.dondays.protocoltags.bridge.VaultBridge;
@@ -20,10 +21,10 @@ public class Group {
         this.name = name;
         this.priority = priority;
 
-        String groupPrefix = VaultBridge.getChat().getGroupPrefix((String)null, name) == null ? "":
-                VaultBridge.getChat().getGroupPrefix((String)null, name);
-        String groupSuffix = VaultBridge.getChat().getGroupSuffix((String)null, name) == null ? "":
-                VaultBridge.getChat().getGroupSuffix((String)null, name);
+        String groupPrefix = VaultBridge.getChat().getGroupPrefix(Bukkit.getWorlds().get(0), name) == null ? "":
+                VaultBridge.getChat().getGroupPrefix(Bukkit.getWorlds().get(0), name);
+        String groupSuffix = VaultBridge.getChat().getGroupSuffix(Bukkit.getWorlds().get(0), name) == null ? "":
+                VaultBridge.getChat().getGroupSuffix(Bukkit.getWorlds().get(0), name);
         if(prefix == null || prefix.isEmpty()) prefix = groupPrefix;
         if(suffix == null || suffix.isEmpty()) suffix = groupSuffix;
         this.prefix = Utils.colorize(prefix);
