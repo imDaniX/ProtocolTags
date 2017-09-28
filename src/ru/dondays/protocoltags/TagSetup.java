@@ -22,7 +22,7 @@ public class TagSetup {
 
         if(ProtocolTags.getInstance().getConfiguration().isCustomTagsEnabled()
                 && (!groupPrefix.equals(playerPrefix) || !groupSuffix.equals(playerSuffix))) {
-            TagApplier.getTagManager().setTag(player, ProtocolTags.getInstance().getConfiguration().getPriority(group),
+            TagApplier.applyTag(player, ProtocolTags.getInstance().getConfiguration().getPriority(group),
                     Utils.colorize(playerPrefix), Utils.colorize(playerSuffix));
         } else {
             ProtocolTags.getInstance().getConfiguration().getGroup(group).apply(player);
@@ -31,7 +31,7 @@ public class TagSetup {
         if(ProtocolTags.getInstance().getConfiguration().isDisplayNamesRewrite()) {
             player.setDisplayName((ProtocolTags.getInstance().getConfiguration().isCustomTagsEnabled() ?
                     Utils.colorize(playerPrefix) :
-                    Utils.colorize(groupPrefix)) + player.getDisplayName());
+                    Utils.colorize(groupPrefix)) + player.getName());
         }
     }
 }
