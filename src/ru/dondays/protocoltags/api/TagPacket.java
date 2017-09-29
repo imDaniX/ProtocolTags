@@ -73,7 +73,7 @@ public class TagPacket {
     }
 
     public void removePlayer(Player player, TagData data) {
-        players.add(player);
+        players.remove(player);
         packet.getPlayers().remove(player.getName());
 
         TagPacket packet = new TagPacket(getName(), WrapperPlayServerScoreboardTeam.Mode.PLAYERS_REMOVED, player);
