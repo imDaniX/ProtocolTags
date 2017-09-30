@@ -48,6 +48,6 @@ public class Group {
     }
 
     public void apply(Player player) {
-        TagApplier.applyTag(player, Utils.parseName(priority + name), prefix, suffix);
+        TagApplier.applyTag(player, Utils.parseName(priority + player.getName()), prefix, suffix);
     }
 }

@@ -22,7 +22,7 @@ public class TagSetup {
 
         if(ProtocolTags.getInstance().getConfiguration().isCustomTagsEnabled()
                 && (!groupPrefix.equals(playerPrefix) || !groupSuffix.equals(playerSuffix))) {
-            TagApplier.applyTag(player, ProtocolTags.getInstance().getConfiguration().getPriority(group),
+            TagApplier.applyTag(player, ProtocolTags.getInstance().getConfiguration().getPriority(group) + player.getName(),
                     Utils.colorize(playerPrefix), Utils.colorize(playerSuffix));
         } else {
             ProtocolTags.getInstance().getConfiguration().getGroup(group).apply(player);
