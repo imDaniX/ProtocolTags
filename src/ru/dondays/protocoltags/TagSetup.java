@@ -13,6 +13,7 @@ public class TagSetup {
     }
 
     public static void setTags(Player player) {
+        if(ProtocolTags.getInstance().getConfig().getBoolean("UseAsAPI", false)) return;
         String group = VaultBridge.getPermission().getPrimaryGroup(player).toLowerCase();
 
         String groupPrefix = VaultBridge.getChat().getGroupPrefix(player.getWorld(), group);

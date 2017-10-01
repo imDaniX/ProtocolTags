@@ -1,3 +1,4 @@
+UseAsAPI: false #использовать плагин лишь как API
 RewriteDisplayNames: true #перезаписывать DisplayName игроков
 EnableCustomTags: true #при true игрокам с измененными префиксами/суффиксами будет ставиться тег исходя из них
 Retag: #автообновление тегов игроков
