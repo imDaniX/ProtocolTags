@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import ru.dondays.protocoltags.api.TagApplier;
 import ru.dondays.protocoltags.bridge.VaultBridge;
+import ru.dondays.protocoltags.groups.Group;
 import ru.dondays.protocoltags.utils.Utils;
 
 public class TagSetup {
@@ -26,7 +27,13 @@ public class TagSetup {
             TagApplier.applyTag(player, ProtocolTags.getInstance().getConfiguration().getPriority(group) + player.getName(),
                     Utils.colorize(playerPrefix), Utils.colorize(playerSuffix));
         } else {
-            ProtocolTags.getInstance().getConfiguration().getGroup(group).apply(player);
+            Group tagGroup = ProtocolTags.getInstance().getConfiguration().getGroupFromMap(group);
+            if(tagGroup != null) {
+                tagGroup.apply(player);
+            } else {
+                TagApplier.applyTag(player, ProtocolTags.getInstance().getConfiguration().getPriority(group) + player.getName(),
+                        Utils.colorize(playerPrefix), Utils.colorize(playerSuffix));
+            }
         }
 
         if(ProtocolTags.getInstance().getConfiguration().isDisplayNamesRewrite()) {

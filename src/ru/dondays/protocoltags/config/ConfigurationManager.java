@@ -65,4 +65,8 @@ public class ConfigurationManager {
     public String getPriority(String groupName) {
         return getGroup(groupName).getPriority();
     }
+
+    public Group getGroupFromMap(String name) {
+        return groups.get(name.toLowerCase());
+    }
 }
