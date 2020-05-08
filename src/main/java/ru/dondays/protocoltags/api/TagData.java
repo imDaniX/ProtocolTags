@@ -1,10 +1,10 @@
 package ru.dondays.protocoltags.api;
 
+import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import ru.dondays.protocoltags.ProtocolTags;
 import ru.dondays.protocoltags.packetwrapper.WrapperPlayServerScoreboardTeam;
-import ru.dondays.protocoltags.utils.Utils;
 
 import java.util.Collection;
 
@@ -13,10 +13,10 @@ public class TagData {
     private TagPacket packet;
 
     public TagData(String name, String prefix, String suffix) {
-        packet = new TagPacket(Utils.parseName(name), WrapperPlayServerScoreboardTeam.Mode.TEAM_CREATED);
+        packet = new TagPacket(name, WrapperPlayServerScoreboardTeam.Mode.TEAM_CREATED);
 
-        this.packet.unsafe().setPrefix(Utils.parse(prefix));
-        this.packet.unsafe().setSuffix(Utils.parse(suffix));
+        this.packet.unsafe().setPrefix(WrappedChatComponent.fromText(prefix));
+        this.packet.unsafe().setSuffix(WrappedChatComponent.fromText(suffix));
 
         packet.insertData(this);
     }
@@ -49,11 +49,11 @@ public class TagData {
         return getPacket().getPlayers();
     }
 
-    public String getPrefix() {
+    public WrappedChatComponent getPrefix() {
         return packet.unsafe().getPrefix();
     }
 
-    public String getSuffix() {
+    public WrappedChatComponent getSuffix() {
         return packet.unsafe().getSuffix();
     }
 

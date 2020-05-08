@@ -7,8 +7,7 @@ import ru.dondays.protocoltags.commands.ProtocolTagsCommand;
 import ru.dondays.protocoltags.config.ConfigurationManager;
 import ru.dondays.protocoltags.listeners.PlayerListener;
 
-public class ProtocolTags
-    extends JavaPlugin {
+public class ProtocolTags extends JavaPlugin {
 
     private static ProtocolTags instance;
 

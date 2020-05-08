@@ -1,5 +1,6 @@
 package ru.dondays.protocoltags.api;
 
+import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import com.google.common.collect.Sets;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
@@ -27,7 +28,7 @@ public class TagPacket {
         this.packet = new WrapperPlayServerScoreboardTeam();
 
         this.packet.setName(name);
-        this.packet.setDisplayName(name);
+        this.packet.setDisplayName(WrappedChatComponent.fromText(name));
         this.packet.setMode(mode);
         this.packet.setNameTagVisibility("ALWAYS");
     }
